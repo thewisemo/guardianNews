@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        applicationId "com.example.android.yournews"
+        applicationId "com.example.android.guardianNews"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
@@ -22,7 +22,7 @@ android {
 dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     // cardview support library
     implementation 'com.android.support:cardview-v7:27.1.1'
     // glide support library ( to retrive photos from the internet )

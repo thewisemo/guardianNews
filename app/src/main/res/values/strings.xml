@@ -11,4 +11,12 @@
     <string name="more">More</string>
     <string name="this_app_was">This App was created by\nWISEMO\nOne of the Google | Udacity Developer schoolarship winners\n2017&#8211;2018</string>
     <string name="google_udacity_logos" translatable="false">google_udacity_logos</string>
+
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">News Settings</string>
+
+    <string name="settings_search_label">Search for news story</string>
+    <string name="settings_search_key" translatable="false">debates</string>
+    <string name="settings_search_default" translatable="false">debates</string>
+    <string name="sett_search_summary">To search with a keyword for story</string>
 </resources>
