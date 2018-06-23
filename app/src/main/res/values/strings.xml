@@ -15,8 +15,18 @@
     <string name="settings_menu_item">Settings</string>
     <string name="settings_title">News Settings</string>
 
-    <string name="settings_search_label">Search for news story</string>
-    <string name="settings_search_key" translatable="false">debates</string>
-    <string name="settings_search_default" translatable="false">debates</string>
-    <string name="sett_search_summary">To search with a keyword for story</string>
+    <string name="settings_search_label">Search for news</string>
+    <string name="settings_search_key" translatable="false">news</string>
+    <string name="settings_search_default" translatable="false">news</string>
+    <string name="sett_search_summary">To search with a keyword for news story</string>
+
+    <string name="settings_images_label">Images</string>
+    <string name="settings_images_key">thumbnail</string>
+    <string name="settings_images_default">thumbnail</string>
+    <string name="sett_images_summary">Uncheck here and images will not be loaded</string>
+
+    <string name="settings_author_label">Story Author</string>
+    <string name="settings_author_key">contributor</string>
+    <string name="settings_author_default">contributor</string>
+    <string name="sett_author_summary">Check and the news author will be displayed</string>
 </resources>
