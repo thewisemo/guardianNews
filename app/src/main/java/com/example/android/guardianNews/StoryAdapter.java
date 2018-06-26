@@ -83,6 +83,10 @@ public class StoryAdapter extends ArrayAdapter<Story> {
         TextView author = listItemView.findViewById(R.id.author);
         author.setText(currentStory.getAuthor());
 
+        if ((currentStory.getAuthor().equals("false"))) {
+            author.setVisibility(View.GONE);
+        }
+
         // Find the TextView in the list_item.xml layout with the ID headline
         TextView headlineTextView = listItemView.findViewById(R.id.headline);
         headlineTextView.setText(currentStory.getHeadline());
@@ -111,6 +115,10 @@ public class StoryAdapter extends ArrayAdapter<Story> {
                 .asBitmap()
                 .load(currentStory.getThumbnailUrl())
                 .into(storyThumbnail);
+
+        if ((currentStory.getThumbnailUrl().equals("false"))) {
+            storyThumbnail.setVisibility(View.GONE);
+        }
 
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView

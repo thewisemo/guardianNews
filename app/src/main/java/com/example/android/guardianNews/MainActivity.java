@@ -207,11 +207,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         boolean imagesThumbnail = sharedPrefs.getBoolean(
                 getString(R.string.settings_images_key),
                 Boolean.parseBoolean(getString(R.string.settings_images_default)));
+        String thumbnail = "thumbnail";
+        if (!imagesThumbnail) {
+            thumbnail = "false";
+        }
         Log.d(LOG_TAG, "This is the image string default value " + imagesThumbnail);
 
         boolean authorContributor = sharedPrefs.getBoolean(
                 getString(R.string.settings_author_key),
                 Boolean.parseBoolean(getString(R.string.settings_author_default)));
+        String contributor = "contributor";
+        if (!authorContributor) {
+            contributor = "false";
+        }
         Log.d(LOG_TAG, "This is the author string default value " + authorContributor);
 
         // parse breaks apart the URI string that's passed into its parameter
@@ -224,8 +232,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("q", searchValue);
 //        uriBuilder.appendQueryParameter("from-date", "2018-06-19");
         uriBuilder.appendQueryParameter("page-size", "100");
-        uriBuilder.appendQueryParameter("show-tags", String.valueOf(authorContributor));
-        uriBuilder.appendQueryParameter("show-fields", "trailText,headline," + String.valueOf(imagesThumbnail) + ",shortUrl");
+        uriBuilder.appendQueryParameter("show-tags", contributor);
+        uriBuilder.appendQueryParameter("show-fields", "trailText,headline," + thumbnail + ",shortUrl");
         uriBuilder.appendQueryParameter("api-key", "4bfdeaf5-f178-4ebe-9859-5d065c52c213");
 
         // Return the completed uri `https://content.guardianapis.com/search?

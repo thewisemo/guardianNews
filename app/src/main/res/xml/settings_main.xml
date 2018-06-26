@@ -12,7 +12,7 @@
     <PreferenceCategory android:title="More settings">
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/story_image_thumbnail"
+            android:key="@string/settings_images_key"
             android:summary="@string/sett_images_summary"
             android:title="@string/settings_images_label" />
         <CheckBoxPreference

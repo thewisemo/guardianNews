@@ -179,9 +179,9 @@ public final class QueryUtils {
                 // Extract the value for the key called "webPublicationDate"
                 String date = currentStory.getString("webPublicationDate");
 
-                // For a given earthquake, extract the JSONObject associated with the
-                // key called "properties", which represents a list of all properties
-                // for that earthquake.
+                // For a given story, extract the JSONObject associated with the
+                // key called "fields", which represents a list of all properties
+                // for that story.
                 JSONObject properties = currentStory.getJSONObject("fields");
 
                 // Extract the value for the key called "headline"
@@ -194,16 +194,16 @@ public final class QueryUtils {
                 String shortUrl = properties.getString("shortUrl");
                 
                 // Extract the value for the key called "thumbnail"
-                String thumbnailUrl = properties.getString("thumbnail");
+                String thumbnailUrl = properties.optString("thumbnail");
                 // Required by the project reviewer from Udacity.
-                // For a given earthquake, extract the JSONObject associated with the
-                // key called "properties", which represents a list of all properties
-                // for that earthquake.
+                // For a given story, extract the JSONObject associated with the
+                // key called "tags", which represents a list of all properties
+                // for that story.
                 JSONArray tagsArray = currentStory.getJSONArray("tags");
-                String author = "Author name not found";
+                String author = "false";
                 if (tagsArray != null && tagsArray.length() > 0)
                     //if the author found ,parse it
-                    author = "By: " + tagsArray.getJSONObject(0).getString("webTitle");
+                    author = "By: " + tagsArray.getJSONObject(0).optString("webTitle");
 
                 // Create a new {@link Story} object with the: Section name, Date, Time, Headline, Trial text, Short URL
                 // and url from the JSON response.
