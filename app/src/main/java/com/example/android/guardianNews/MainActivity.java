@@ -26,31 +26,24 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Story>>,
         SwipeRefreshLayout.OnRefreshListener {
 
     public static final String LOG_TAG = MainActivity.class.getName();
-    /**
-     * Constant value for the earthquake loader ID. We can choose any integer.
-     * This really only comes into play if you're using multiple loaders.
-     */
+    // Constant value for the story loader ID.
     private static final int STORY_LOADER_ID = 1;
-    /**
-     * URL for story data from the Guardian data set
-     * https://content.guardianapis.com/search?q=samsung&from-date=2018-01-01&page-size=100&show-tags=contributor&show-fields=trailText,headline,thumbnail,shortUrl&api-key=test"
-     */
+    // URL for story data from the Guardian data set
     private static final String GUARDIAN_REQUEST_URL =
             "https://content.guardianapis.com/search";
-    /**
-     * Adapter for the list of stories
-     */
+    // Adapter for the list of stories
     private StoryAdapter mAdapter;
-    /**
-     * TextView that is displayed when the list is empty
-     */
+    // TextView that is displayed when the list is empty
     private TextView mEmptyStateTextView;
     // Progress bar object
     private ProgressBar mProgressBar;
@@ -66,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
          * hide from the ActionBar both back button & title
          * then inflate the custom view for the actionBar menu
          */
-
         ActionBar mActionBar = getSupportActionBar();
         assert mActionBar != null;
         mActionBar.setDisplayShowHomeEnabled(false);
@@ -179,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
     }
+
     // onCreateLoader method
     @Override
     // onCreateLoader instantiates and returns a new Loader for the given ID
@@ -190,9 +183,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getString(R.string.settings_search_key),
                 getString(R.string.settings_search_default));
         Log.d(LOG_TAG, "This is the search string default value " + searchValue);
-        //
+
+        String dateValue = sharedPrefs.getString(
+                getString(R.string.settings_date_key),
+                getString(R.string.settings_date_default));
+        if (dateValue.isEmpty()) {
+            dateValue = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        }
+        // Assigning strings values for both thumbnail & contributor to be used in the final query link string
         String thumbnail = "thumbnail";
         String contributor = "contributor";
+        // Assigning a boolean value for the load images preference checkbox.
         boolean imagesThumbnail = sharedPrefs.getBoolean(
                 getString(R.string.settings_images_key),
                 Boolean.parseBoolean(getString(R.string.settings_images_default)));
@@ -200,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             thumbnail = "false";
         }
         Log.d(LOG_TAG, "This is the image string default value " + imagesThumbnail);
-        //
+        // Assigning a boolean value for the author name preference checkbox.
         boolean authorContributor = sharedPrefs.getBoolean(
                 getString(R.string.settings_author_key),
                 Boolean.parseBoolean(getString(R.string.settings_author_default)));
@@ -212,16 +213,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
         // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        // Append query parameter and its value. For example, the `format=geojson`
+        // Append query parameter and its value. For example, the `page-size=100`
         uriBuilder.appendQueryParameter("q", searchValue);
+        uriBuilder.appendQueryParameter("from-date", dateValue);
         uriBuilder.appendQueryParameter("page-size", "100");
         uriBuilder.appendQueryParameter("show-tags", contributor);
         uriBuilder.appendQueryParameter("show-fields", "trailText,headline," + thumbnail + ",shortUrl");
         uriBuilder.appendQueryParameter("api-key", "4bfdeaf5-f178-4ebe-9859-5d065c52c213");
-        // Return the completed uri `https://content.guardianapis.com/search?
+        // Return the completed uri:
+        // https://content.guardianapis.com/search?
         // q=news&page-size=10&show-tags=contributor&show-fields=trailText,headline,thumbnail,shortUrl&api-key=4bfdeaf5-f178-4ebe-9859-5d065c52c213"
         return new StoryLoader(this, uriBuilder.toString());
     }
+
     // onLoadFinished method
     @Override
     public void onLoadFinished
@@ -240,6 +244,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mAdapter.addAll(stories);
         }
     }
+
     // onLoaderReset method
     @Override
     public void onLoaderReset(Loader<List<Story>> loader) {

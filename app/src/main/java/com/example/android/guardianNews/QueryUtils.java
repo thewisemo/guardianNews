@@ -161,7 +161,7 @@ public final class QueryUtils {
             // Extract the JSONArray associated with the key called "results",
             // which represents a list of features (or stories).
             JSONArray storyArray = rootJson.getJSONArray("results");
-            // For each earthquake in the storyArray, create an {@link Earthquake} object
+            // For each story in the storyArray, create an {@link Story} object
             for (int i = 0; i < storyArray.length(); i++) {
                 // Get a single story at position i within the list of stories
                 JSONObject currentStory = storyArray.getJSONObject(i);

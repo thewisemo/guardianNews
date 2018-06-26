@@ -9,6 +9,10 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+/**
+ * This activity class toke me a long time to be written right, Specially the 2 CheckBoxPreference.
+ */
+
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +22,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public static class StoryPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
-        public static final String LOG_TAG = StoryPreferenceFragment.class.getName();
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,13 @@ public class SettingsActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.settings_main);
 
             Preference searchKeyword = findPreference(getString(R.string.settings_search_key));
+            Preference date = findPreference(getString(R.string.settings_date_key));
+
             bindPreferenceSummaryToValue(searchKeyword);
+            bindPreferenceSummaryToValue(date);
+
+            clearPreferenceValues(searchKeyword);
+            clearPreferenceValues(date);
 
             CheckBoxPreference imagesCheckbox = (CheckBoxPreference) getPreferenceManager().findPreference(getString(R.string.settings_images_key));
             assert imagesCheckbox != null;
@@ -64,15 +73,18 @@ public class SettingsActivity extends AppCompatActivity {
         private void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
+            String preferenceString = preferences.getString(preference.getKey(), "");
+            onPreferenceChange(preference, preferenceString);
+        }
+
+        private void clearPreferenceValues(Preference preference) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean(getString(R.string.settings_images_key), true);
             editor.putBoolean(getString(R.string.settings_author_key), false);
             editor.clear();
             editor.apply();
             editor.commit();
-            String preferenceString = preferences.getString(preference.getKey(), "");
-            onPreferenceChange(preference, preferenceString);
-
         }
 
         @Override

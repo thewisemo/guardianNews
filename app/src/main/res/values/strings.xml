@@ -17,8 +17,13 @@
 
     <string name="settings_search_label">Search for news</string>
     <string name="settings_search_key" translatable="false">news</string>
-    <string name="settings_search_default" translatable="false">egypt</string>
+    <string name="settings_search_default" translatable="false" />
     <string name="settings_search_summary">To search with a keyword for news stories</string>
+
+    <string name="settings_date_label">Date</string>
+    <string name="settings_date_key" translatable="false">date_key</string>
+    <string name="settings_date_default" translatable="false" />
+    <string name="settings_date_summary">Specify a date for your search like 2018&#8211;05&#8211;31</string>
 
     <string name="settings_images_label">Images</string>
     <string name="settings_images_key" translatable="false">thumbnail</string>
