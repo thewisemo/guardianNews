@@ -18,6 +18,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public static class StoryPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
+        public static final String LOG_TAG = StoryPreferenceFragment.class.getName();
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,12 @@ public class SettingsActivity extends AppCompatActivity {
         private void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean(getString(R.string.settings_images_key), true);
+            editor.putBoolean(getString(R.string.settings_author_key), false);
+            editor.clear();
+            editor.apply();
+            editor.commit();
             String preferenceString = preferences.getString(preference.getKey(), "");
             onPreferenceChange(preference, preferenceString);
 

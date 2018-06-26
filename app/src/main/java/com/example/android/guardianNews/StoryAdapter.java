@@ -11,8 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 public class StoryAdapter extends ArrayAdapter<Story> {
@@ -111,11 +109,10 @@ public class StoryAdapter extends ArrayAdapter<Story> {
         // Find the ImageView in the list_item.xml layout with ID story_thumb
         ImageView storyThumbnail = listItemView.findViewById(R.id.story_thumb);
         // Glide to get the image in the thumbnail string URL
-        Glide.with(getContext())
-                .asBitmap()
+        GlideApp.with(getContext())
                 .load(currentStory.getThumbnailUrl())
+                .placeholder(R.mipmap.ic_launcher)
                 .into(storyThumbnail);
-
         if ((currentStory.getThumbnailUrl().equals("false"))) {
             storyThumbnail.setVisibility(View.GONE);
         }

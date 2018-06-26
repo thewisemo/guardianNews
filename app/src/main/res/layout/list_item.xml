@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
@@ -12,16 +12,6 @@
         android:layout_margin="@dimen/sixDp"
         card_view:cardCornerRadius="@dimen/sixDp"
         card_view:contentPadding="@dimen/sixteenDp">
-        <!--Story Image View-->
-        <ImageView
-            android:id="@+id/story_thumb"
-            android:layout_width="@dimen/storyImageSize"
-            android:layout_height="@dimen/storyImageSize"
-            android:layout_gravity="end"
-            android:layout_marginTop="@dimen/thirtyFiveDp"
-            android:contentDescription="@string/story_image_thumbnail"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher" />
         <!--Start Story Section, date, time Text Vs-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,9 +20,9 @@
             <!--Story section name TV-->
             <TextView
                 android:id="@+id/sectionName"
+                style="@style/sectionName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/sectionName"
                 tools:text="Business" />
             <!--Story Date TV-->
             <TextView
@@ -55,27 +45,47 @@
             <!--End Story Section, date, time Text Vs-->
         </LinearLayout>
         <!--Start Story Text Vs-->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/storyTextMargin"
-            android:layout_marginRight="@dimen/storyTextMargin"
             android:layout_marginTop="@dimen/thirtyFiveDp"
             android:orientation="vertical">
+            <!--Story Image View-->
+            <ImageView
+                android:id="@+id/story_thumb"
+                android:layout_width="@dimen/storyImageSize"
+                android:layout_height="@dimen/storyImageSize"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/sixteenDp"
+                android:layout_marginStart="@dimen/sixteenDp"
+                android:contentDescription="@string/story_image_thumbnail"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
             <!--Story Head Line TV-->
             <TextView
                 android:id="@+id/headline"
                 style="@style/StoryHeadLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_toLeftOf="@id/story_thumb"
+                android:layout_toStartOf="@id/story_thumb"
+                android:ellipsize="end"
+                android:maxLines="3"
                 tools:text="@string/story_headline_demo" />
             <!--Story Trail Text TV-->
             <TextView
                 android:id="@+id/trailText"
                 style="@style/trailText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_below="@id/headline"
                 android:layout_marginTop="@dimen/sixDp"
+                android:layout_toLeftOf="@id/story_thumb"
+                android:layout_toStartOf="@id/story_thumb"
                 android:ellipsize="end"
                 android:maxLines="3"
                 tools:text="@string/trial_text_demo" />
@@ -85,19 +95,20 @@
                 style="@style/storyAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/trailText"
                 android:layout_marginTop="@dimen/sixDp"
                 tools:text="By: Richard Partington" />
-
             <!--Story Short URL TV-->
             <TextView
                 android:id="@+id/shortUrl"
                 style="@style/storyShortUrl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/author"
                 android:layout_marginTop="@dimen/sixDp"
                 tools:text="https://gu.com/p/8y74g" />
             <!--End Story Text Vs-->
-        </LinearLayout>
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 
-</LinearLayout>
+</RelativeLayout>

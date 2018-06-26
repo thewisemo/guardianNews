@@ -64,6 +64,8 @@ public final class QueryUtils {
         // Extract relevant fields from the JSON response and create an {@link Event} object
         List<Story> story = extractFeatureFromJson(jsonResponse);
 
+        Log.d(LOG_TAG, "This is the " + requestUrl);
+
         // Return the {@link Event}
         return story;
     }
@@ -80,7 +82,6 @@ public final class QueryUtils {
         }
         return url;
     }
-
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
@@ -91,7 +92,6 @@ public final class QueryUtils {
         if (url == null) {
             return jsonResponse;
         }
-
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
         try {
@@ -121,7 +121,6 @@ public final class QueryUtils {
         }
         return jsonResponse;
     }
-
     /**
      * Convert the {@link InputStream} into a String which contains the
      * whole JSON response from the server.
@@ -139,7 +138,6 @@ public final class QueryUtils {
         }
         return output.toString();
     }
-
     /**
      * Return a list of {@link Story} objects that has been built up from
      * parsing the given JSON response.
@@ -149,15 +147,12 @@ public final class QueryUtils {
         if (TextUtils.isEmpty(storyJSON)) {
             return null;
         }
-
         // Create an empty ArrayList that we can start adding stories to
         List<Story> stories = new ArrayList<>();
-
         // Try to parse the JSON response string. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
-
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(storyJSON);
             // Create a JSONObject from the base JSON response string
@@ -166,33 +161,24 @@ public final class QueryUtils {
             // Extract the JSONArray associated with the key called "results",
             // which represents a list of features (or stories).
             JSONArray storyArray = rootJson.getJSONArray("results");
-
             // For each earthquake in the storyArray, create an {@link Earthquake} object
             for (int i = 0; i < storyArray.length(); i++) {
-
                 // Get a single story at position i within the list of stories
                 JSONObject currentStory = storyArray.getJSONObject(i);
-
                 // Extract the value for the key called "sectionName"
                 String sectionName = currentStory.getString("sectionName");
-
                 // Extract the value for the key called "webPublicationDate"
                 String date = currentStory.getString("webPublicationDate");
-
                 // For a given story, extract the JSONObject associated with the
                 // key called "fields", which represents a list of all properties
                 // for that story.
                 JSONObject properties = currentStory.getJSONObject("fields");
-
                 // Extract the value for the key called "headline"
                 String headline = properties.getString("headline");
-
                 // Extract the value for the key called "trailText"
                 String trailText = properties.getString("trailText");
-
                 // Extract the value for the key called "shortUrl"
                 String shortUrl = properties.getString("shortUrl");
-                
                 // Extract the value for the key called "thumbnail"
                 String thumbnailUrl = properties.optString("thumbnail");
                 // Required by the project reviewer from Udacity.

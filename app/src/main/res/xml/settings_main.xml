@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_title">
+
     <EditTextPreference
         android:defaultValue="@string/settings_search_default"
         android:inputType="textAutoComplete"
         android:key="@string/settings_search_key"
         android:selectAllOnFocus="true"
-        android:summary="@string/sett_search_summary"
+        android:summary="@string/settings_search_summary"
         android:title="@string/settings_search_label" />
 
     <PreferenceCategory android:title="More settings">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/settings_images_key"
-            android:summary="@string/sett_images_summary"
+            android:summary="@string/settings_images_summary"
             android:title="@string/settings_images_label" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/settings_author_key"
-            android:summary="@string/sett_author_summary"
+            android:summary="@string/settings_author_summary"
             android:title="@string/settings_author_label" />
     </PreferenceCategory>
+
 </PreferenceScreen>
