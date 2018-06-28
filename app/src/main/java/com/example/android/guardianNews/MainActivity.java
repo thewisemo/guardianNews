@@ -187,6 +187,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         String dateValue = sharedPrefs.getString(
                 getString(R.string.settings_date_key),
                 getString(R.string.settings_date_default));
+        // If the date value in the preference screen is empty
+        // Set the date to the local date format
         if (dateValue.isEmpty()) {
             dateValue = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         }

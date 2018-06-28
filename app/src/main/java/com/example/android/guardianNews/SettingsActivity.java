@@ -29,7 +29,19 @@ public class SettingsActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.settings_main);
 
             Preference searchKeyword = findPreference(getString(R.string.settings_search_key));
-            Preference date = findPreference(getString(R.string.settings_date_key));
+
+            final DatePreference date = (DatePreference) getPreferenceManager().findPreference(getString(R.string.settings_date_key));
+            assert date != null;
+            date.setText("2018-06-01");
+            date.setSummary("2018-06-01");
+            date.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    //Code to change values.
+                    date.setSummary((String) newValue);
+                    return true;
+                }
+            });
 
             bindPreferenceSummaryToValue(searchKeyword);
             bindPreferenceSummaryToValue(date);
