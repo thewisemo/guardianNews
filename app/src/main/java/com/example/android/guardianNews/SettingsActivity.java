@@ -32,8 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             final DatePreference date = (DatePreference) getPreferenceManager().findPreference(getString(R.string.settings_date_key));
             assert date != null;
-            date.setText("2018-06-01");
-            date.setSummary("2018-06-01");
+            date.setSummary("Choose the date of displayed stories");
             date.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {

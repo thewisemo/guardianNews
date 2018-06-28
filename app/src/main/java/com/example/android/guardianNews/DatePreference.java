@@ -5,11 +5,14 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class DatePreference extends DialogPreference {
     private int lastDate = 0;
@@ -43,14 +46,21 @@ public class DatePreference extends DialogPreference {
 
     @Override
     protected View onCreateDialogView() {
-        picker = new DatePicker(getContext());
+        try {
+            picker = new DatePicker(getContext());
 
-        // setCalendarViewShown(false) attribute is only available from API level 11
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            picker.setCalendarViewShown(false);
+            // setCalendarViewShown(false) attribute is only available from API level 11
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                picker.setCalendarViewShown(false);
+            }
+
+            return (picker);
+        } catch (Exception e) {
+            Log.e(TAG, "onCreateDialogView", e);
+            throw e;
         }
 
-        return (picker);
+
     }
 
     @Override

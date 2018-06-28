@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_title">
-    <!--Search keyword EditText Pref-->
-    <EditTextPreference
-        android:defaultValue="@string/settings_search_default"
-        android:inputType="textAutoComplete"
-        android:key="@string/settings_search_key"
-        android:selectAllOnFocus="true"
-        android:summary="@string/settings_search_summary"
-        android:title="@string/settings_search_label" />
+    <PreferenceCategory android:title="Search by">
+        <!--Search keyword EditText Pref-->
+        <EditTextPreference
+            android:defaultValue="@string/settings_search_default"
+            android:inputType="textAutoComplete"
+            android:key="@string/settings_search_key"
+            android:selectAllOnFocus="true"
+            android:summary="@string/settings_search_summary"
+            android:title="@string/settings_search_label" />
+        <!--Date picker dialog Pref-->
+        <com.example.android.guardianNews.DatePreference
+            android:defaultValue="@string/settings_date_default"
+            android:key="@string/settings_date_key"
+            android:summary="@string/settings_date_summary"
+            android:title="@string/settings_date_label" />
 
-    <!--Date picker dialog Pref-->
-    <com.example.android.guardianNews.DatePreference
-        android:key="@string/settings_date_key"
-        android:defaultValue="@string/settings_date_default"
-        android:summary="@string/settings_date_summary"
-        android:title="@string/settings_date_label" />
+    </PreferenceCategory>
 
     <PreferenceCategory android:title="More settings">
         <!--Story load image Pref-->
