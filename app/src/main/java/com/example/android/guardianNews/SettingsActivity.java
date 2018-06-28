@@ -26,12 +26,16 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.settings_main);
+
 
             Preference searchKeyword = findPreference(getString(R.string.settings_search_key));
 
             final DatePreference date = (DatePreference) getPreferenceManager().findPreference(getString(R.string.settings_date_key));
+
+            addPreferencesFromResource(R.xml.settings_main);
+
             assert date != null;
+            date.setText("2018-06-01");
             date.setSummary("Choose the date of displayed stories");
             date.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -41,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
                 }
             });
+
 
             bindPreferenceSummaryToValue(searchKeyword);
             bindPreferenceSummaryToValue(date);
